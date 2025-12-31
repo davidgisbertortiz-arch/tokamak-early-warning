@@ -1,0 +1,13 @@
+# Results directory - generated outputs go here
+# This directory is gitignored except for .gitkeep
+
+Contents after running scripts:
+- tcn_results.json: TCN model metrics
+- tcn_tradeoff_curves.csv: Trade-off curve data
+- model_comparison.png: Side-by-side metrics comparison
+- tcn_tradeoff.png: Threshold vs metrics curves
+- tcn_far_vs_recall.png: FAR vs Recall trade-off
+- tcn_warning_time_hist.png: Warning time distribution
+- tcn_reliability.png: Calibration reliability diagram
+- baseline_*.png: Same plots for baseline model
+- alarm_evaluation_results.json: Full comparison results

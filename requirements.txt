@@ -5,11 +5,19 @@ numpy>=1.24.0
 # Machine learning
 scikit-learn>=1.3.0
 
+# Deep learning (CPU only for reproducibility in Codespaces)
+torch>=2.0.0
+--extra-index-url https://download.pytorch.org/whl/cpu
+
 # HDF5 support for pandas
 tables>=3.8.0
 
 # Visualization
 matplotlib>=3.7.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=4.0.0
 
 # Optional: for notebooks
 jupyter>=1.0.0
