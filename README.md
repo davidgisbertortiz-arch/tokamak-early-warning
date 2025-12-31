@@ -300,5 +300,5 @@ MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 <p align="center">
-  <i>Built with ❤️ for fusion energy research</i>
+  <i>Built for fusion energy research</i>
 </p>
