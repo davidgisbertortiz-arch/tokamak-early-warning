@@ -7,7 +7,7 @@
 **A production-grade ML pipeline for predicting tokamak density limit disruptions *before* they occur.**
 
 <p align="center">
-  <img src="results/discharge_demo.png" alt="Early Warning Demo" width="800"/>
+  <img src="assets/figures/discharge-demo.png" alt="Early Warning Demo" width="800"/>
 </p>
 
 ---
@@ -48,7 +48,7 @@ Most ML classification projects stop at **sample-level metrics** like accuracy o
 This system evaluates models the way operators would: *"Did you warn me in time?"*
 
 <p align="center">
-  <img src="results/model_comparison.png" alt="Model Comparison" width="700"/>
+  <img src="assets/figures/model-comparison.png" alt="Model Comparison" width="700"/>
 </p>
 
 ---
@@ -201,7 +201,7 @@ tokamak-early-warning/
 ### Precision-Recall Curves
 
 <p align="center">
-  <img src="results/pr_curves.png" alt="PR Curves" width="600"/>
+  <img src="assets/figures/pr-curves.png" alt="PR Curves" width="600"/>
 </p>
 
 ### Calibration Reliability
@@ -209,19 +209,19 @@ tokamak-early-warning/
 Well-calibrated probabilities are essential for setting alarm thresholds:
 
 <p align="center">
-  <img src="results/reliability_diagram.png" alt="Reliability Diagram" width="700"/>
+  <img src="assets/figures/reliability-diagram.png" alt="Reliability Diagram" width="700"/>
 </p>
 
 ### Event Recall vs False Alarm Trade-off
 
 <p align="center">
-  <img src="results/far_vs_recall.png" alt="FAR vs Recall" width="600"/>
+  <img src="assets/figures/far-vs-recall.png" alt="FAR vs Recall" width="600"/>
 </p>
 
 ### Warning Time Distribution
 
 <p align="center">
-  <img src="results/warning_time_distribution.png" alt="Warning Times" width="700"/>
+  <img src="assets/figures/warning-time-distribution.png" alt="Warning Times" width="700"/>
 </p>
 
 ---

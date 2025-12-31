@@ -1,0 +1,27 @@
+name: README Linkcheck
+
+on:
+  push:
+    paths:
+      - 'README.md'
+      - 'assets/**'
+      - 'scripts/check_readme_assets.py'
+  pull_request:
+    paths:
+      - 'README.md'
+      - 'assets/**'
+      - 'scripts/check_readme_assets.py'
+
+jobs:
+  check-readme-assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      
+      - name: Check README local references
+        run: python scripts/check_readme_assets.py

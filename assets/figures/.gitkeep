@@ -1,0 +1,8 @@
+# Assets for README documentation
+# These figures are committed to ensure README renders correctly on GitHub.
+# 
+# To regenerate figures with real model data:
+#   python scripts/make_figures.py
+#
+# To regenerate placeholder figures:
+#   python scripts/generate_readme_figures.py
