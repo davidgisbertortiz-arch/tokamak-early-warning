@@ -26,7 +26,6 @@ import sys
 import argparse
 import json
 from pathlib import Path
-from datetime import datetime
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -67,6 +66,12 @@ from src.uncertainty.calibration import (
     TemperatureScaling,
     print_calibration_report
 )
+from tokamak_early_warning.config import (
+    DEFAULT_DATA_PATH,
+    DEFAULT_SEED,
+    set_global_seed,
+    utc_timestamp,
+)
 
 
 def parse_args():
@@ -78,7 +83,7 @@ def parse_args():
     
     # Data
     parser.add_argument(
-        "--data-path", type=str, default="data/raw/DL_DataFrame.h5",
+        "--data-path", type=str, default=DEFAULT_DATA_PATH,
         help="Path to HDF5 dataset"
     )
     
@@ -151,7 +156,7 @@ def parse_args():
     
     # Reproducibility
     parser.add_argument(
-        "--seed", type=int, default=42,
+        "--seed", type=int, default=DEFAULT_SEED,
         help="Random seed"
     )
     
@@ -177,7 +182,7 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Set random seeds
-    np.random.seed(args.seed)
+    set_global_seed(args.seed)
     
     # --- Load Data ---
     print("\n[1/7] Loading dataset...")
@@ -383,12 +388,14 @@ def main():
     print(" Saving Results")
     print("=" * 70)
     
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = utc_timestamp()
     
     # Save metrics summary
     results = {
         "timestamp": timestamp,
         "config": {
+            "seed": args.seed,
+            "data_path": args.data_path,
             "seq_len": args.seq_len,
             "hidden_channels": args.hidden_channels,
             "n_blocks": args.n_blocks,

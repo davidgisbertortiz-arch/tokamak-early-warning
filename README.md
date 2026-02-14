@@ -98,6 +98,7 @@ The label (`density_limit_phase = 1`) marks time points where the plasma is in t
 ```bash
 # 1. Install dependencies
 pip install -r requirements.txt
+pip install -e .
 
 # 2. Download dataset (~264k samples)
 ./scripts/fetch_data.sh
@@ -107,6 +108,28 @@ python scripts/make_figures.py
 
 # 4. (Optional) Full TCN training with detailed evaluation
 python scripts/train_tcn.py --epochs 30
+
+# 5. CLI help
+python -m tokamak_early_warning --help
+```
+
+## 🔁 Reproducibility
+
+Run the full deterministic workflow from a fresh clone:
+
+```bash
+bash scripts/reproduce.sh
+```
+
+This command installs dependencies, fetches data, trains/evaluates with fixed seed (`42`), and writes timestamped outputs to `reports/<timestamp>/` including:
+- `config.json`
+- `train/tcn_results.json`
+- `evaluation/alarm_evaluation_results.json`
+
+You can also use the package CLI:
+
+```bash
+python -m tokamak_early_warning reproduce
 ```
 
 ### Explore Interactively
@@ -290,6 +313,13 @@ pytest tests/ --cov=src             # With coverage
 2. Greenwald, M. (2002). "Density limits in toroidal plasmas." *PPCF* 44, R27.
 3. Bai et al. (2018). "An Empirical Evaluation of Generic Convolutional and Recurrent Networks."
 4. Guo et al. (2017). "On Calibration of Modern Neural Networks." *ICML*.
+
+---
+
+## 📘 Additional Documentation
+
+- [Model Card](MODEL_CARD.md)
+- [Dataset Documentation](DATASET.md)
 
 ---
 

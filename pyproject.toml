@@ -1,0 +1,34 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tokamak-early-warning"
+version = "0.1.0"
+description = "Early warning ML pipeline for tokamak density limit events"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Tokamak Early Warning Contributors" }]
+dependencies = [
+  "pandas>=2.0.0",
+  "numpy>=1.24.0",
+  "scikit-learn>=1.3.0",
+  "torch>=2.0.0",
+  "tables>=3.8.0",
+  "matplotlib>=3.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=7.0.0",
+  "pytest-cov>=4.0.0",
+  "jupyter>=1.0.0",
+]
+
+[project.scripts]
+tokamak-early-warning = "tokamak_early_warning.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*", "tokamak_early_warning*"]

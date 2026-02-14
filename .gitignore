@@ -209,3 +209,12 @@ __marimo__/
 # Project-specific: data directory (except .gitkeep)
 data/
 !data/.gitkeep
+
+# Project-specific: generated reports/artifacts (keep folder placeholders)
+reports/*
+!reports/.gitkeep
+results/*.json
+results/*.csv
+results/*.pt
+results/*.png
+*.h5

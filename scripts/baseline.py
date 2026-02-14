@@ -31,6 +31,7 @@ from src.data.dataset import (
 )
 from src.models.baseline_lr import train_baseline
 from src.evaluation.metrics import evaluate_model, print_evaluation_report
+from tokamak_early_warning.config import DEFAULT_DATA_PATH, DEFAULT_SEED, set_global_seed
 
 
 def main():
@@ -40,8 +41,9 @@ def main():
     
     # --- Load Data ---
     print("\n[1/4] Loading dataset...")
+    set_global_seed(DEFAULT_SEED)
     try:
-        df = load_density_limit_data("data/raw/DL_DataFrame.h5")
+        df = load_density_limit_data(DEFAULT_DATA_PATH)
     except FileNotFoundError as e:
         print(f"ERROR: {e}")
         sys.exit(1)
@@ -60,7 +62,7 @@ def main():
         train_frac=0.70, 
         val_frac=0.15, 
         test_frac=0.15,
-        random_state=42
+        random_state=DEFAULT_SEED
     )
     
     print_split_stats(train_df, val_df, test_df)
@@ -72,7 +74,7 @@ def main():
     
     # --- Train Model ---
     print("\n[3/4] Training LogisticRegression (class_weight='balanced')...")
-    model = train_baseline(X_train, y_train, max_iter=500, random_state=42)
+    model = train_baseline(X_train, y_train, max_iter=500, random_state=DEFAULT_SEED)
     print("  Training complete!")
     
     # --- Evaluate ---

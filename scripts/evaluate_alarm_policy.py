@@ -23,7 +23,6 @@ import sys
 import argparse
 import json
 from pathlib import Path
-from datetime import datetime
 
 # Add src to path for imports
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -64,6 +63,12 @@ from src.uncertainty.calibration import (
     expected_calibration_error,
     reliability_diagram_data
 )
+from tokamak_early_warning.config import (
+    DEFAULT_DATA_PATH,
+    DEFAULT_SEED,
+    set_global_seed,
+    utc_timestamp,
+)
 
 
 def parse_args():
@@ -86,7 +91,7 @@ def parse_args():
     
     # Data
     parser.add_argument(
-        "--data-path", type=str, default="data/raw/DL_DataFrame.h5",
+        "--data-path", type=str, default=DEFAULT_DATA_PATH,
         help="Path to HDF5 dataset"
     )
     
@@ -120,7 +125,7 @@ def parse_args():
     
     # Reproducibility
     parser.add_argument(
-        "--seed", type=int, default=42,
+        "--seed", type=int, default=DEFAULT_SEED,
         help="Random seed"
     )
     
@@ -579,7 +584,7 @@ def main():
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Set random seeds
-    np.random.seed(args.seed)
+    set_global_seed(args.seed)
     
     # --- Load Data ---
     print("\n[1/3] Loading dataset...")
@@ -667,8 +672,14 @@ def main():
             del results[model_name]["tradeoff_df"]
     
     results_path = output_dir / "alarm_evaluation_results.json"
+    payload = {
+        "timestamp": utc_timestamp(),
+        "seed": args.seed,
+        "data_path": args.data_path,
+        "results": results,
+    }
     with open(results_path, "w") as f:
-        json.dump(results, f, indent=2, default=str)
+        json.dump(payload, f, indent=2, default=str)
     print(f"  Saved results to {results_path}")
     
     print(f"\n  All outputs saved to: {output_dir}/")
