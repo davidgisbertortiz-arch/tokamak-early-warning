@@ -115,22 +115,42 @@ python -m tokamak_early_warning --help
 
 ## 🔁 Reproducibility
 
-Run the full deterministic workflow from a fresh clone:
+Step-by-step commands to reproduce every result from a **fresh clone**:
 
 ```bash
-bash scripts/reproduce.sh
+# 1. Create and activate a virtual environment
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# 2. Install dependencies
+pip install --upgrade pip
+pip install -r requirements.txt
+pip install -e .
+
+# 3. Download the MIT-PSFC dataset (~264k samples, idempotent)
+./scripts/fetch_data.sh
+
+# 4. Run the logistic-regression baseline
+python scripts/baseline.py
+
+# 5. Train the TCN model (CPU, ~5-10 min)
+python scripts/train_tcn.py --epochs 30
+
+# 6. Generate all figures into results/
+python scripts/make_figures.py
+
+# 7. Run the test suite
+pytest tests/ -v
 ```
 
-This command installs dependencies, fetches data, trains/evaluates with fixed seed (`42`), and writes timestamped outputs to `reports/<timestamp>/` including:
-- `config.json`
-- `train/tcn_results.json`
-- `evaluation/alarm_evaluation_results.json`
-
-You can also use the package CLI:
+### One-command deterministic run
 
 ```bash
-python -m tokamak_early_warning reproduce
+bash scripts/reproduce.sh          # installs, trains, evaluates (seed=42)
+python -m tokamak_early_warning reproduce   # same via CLI
 ```
+
+Outputs land in `reports/<timestamp>/` with `config.json`, training metrics, and alarm evaluation results.
 
 ### Explore Interactively
 
