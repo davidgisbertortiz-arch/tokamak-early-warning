@@ -207,8 +207,9 @@ marimo/_lsp/
 __marimo__/
 
 # Project-specific: data directory (except .gitkeep)
-data/
-!data/.gitkeep
+# Use /data/ (rooted) so src/data/ is NOT ignored
+/data/
+!/data/.gitkeep
 
 # Project-specific: generated reports/artifacts (keep folder placeholders)
 reports/*
